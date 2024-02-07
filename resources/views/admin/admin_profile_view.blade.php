@@ -1,7 +1,6 @@
 @extends ('admin.admin_dashboard')
 @section('admin')
-<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <div class="page-content">
 
 
