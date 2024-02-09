@@ -18,7 +18,7 @@
   <!-- End fonts -->
 
 	<!-- core:css -->
-	<link rel="stylesheet" href="{{asset('../assets/vendors/core/core.css')}}">
+	<link rel="stylesheet" href="{{asset('backend/assets/vendors/core/core.css')}}">
 	<!-- endinject -->
 
 	<!-- Plugin css for this page -->

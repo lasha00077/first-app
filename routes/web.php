@@ -43,6 +43,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/profile', [AdminController::class,'Adminprofile'])
     ->name('admin.profile');
 
+    Route::post('/admin/profile/store', [AdminController::class,'Adminprofile'])
+    ->name('adminprofilestore');
+
 });    //end group Admin Middleware
 
 //agen group middleware
