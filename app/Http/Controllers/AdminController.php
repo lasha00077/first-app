@@ -50,12 +50,12 @@ class AdminController extends Controller
     $data ->username = $request->username;
 
     if ($request->file('photo'))
-    {
+     {
        $file = $request->file('photo'); 
        $filename = date('YmdHi').$file->getClientOriginalName();
        $file->move(public_path('upload/admin_images'),$filename);
        $data['photo'] = $filename;
-    }
+     }
     $data->save();
     return redirect()->back();
    }//End Method

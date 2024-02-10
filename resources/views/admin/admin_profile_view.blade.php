@@ -18,7 +18,7 @@
 
               <div>
                 <img class="wd-100 rounded-circle" src="{{(!empty($profileData->photo)) ?
-                 url('upload/admin_images/'.profileData->photo) : url('upload/no_image.jpg')}}" alt="profile">
+                 url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="profile">
                 <span class="h4 ms-3">{{ $profileData->username}}</span>
               </div>
 
@@ -63,8 +63,8 @@
   
                                   <h6 class="card-title">Update Admin Profile</h6>
   
-                                  <form method="POST" action="/admin/profile/store" class="forms-sample" enctype="multipart/form-data">
-                                      @csrf
+                                  <form method="POST" action="{{ route ('admin.profile.store')}}" class="forms-sample" enctype="multipart/form-data">
+                                    @csrf
                                       <div class="mb-3">
                                         <label for="exampleInputUsername1" class="form-label">Username</label>
                                         <input type="text" name="username" class="form-control" id="exampleInputUsername1" autocomplete="off" value ="{{$profileData->username}}">
@@ -96,7 +96,7 @@
                                         <div class="mb3">
                                             <label  for="exampleInputEmail1" class="form-label"> </label>
                                             <img id="showImage" class="wd-80 rounded-circle" src="{{(!empty($profileData->photo)) ?
-                                              url('upload/admin_images/'.profileData->photo) : url('upload/no_image.jpg')}}" alt="profile">
+                                              url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="profile">
                                              <span class="h4 ms-3">{{ $profileData->username}}</span>
                                         </div>
                                       <button type="submit" class="btn btn-primary me-2">Save Changes</button>
