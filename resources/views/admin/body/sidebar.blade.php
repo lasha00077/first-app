@@ -37,6 +37,22 @@
                 </li>
 
                 <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="collapse" href="#amenitie" role="button" aria-expanded="false" aria-controls="emails">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Amenitie</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                  </a>
+                  <div class="collapse" id="amenitie">
+                    <ul class="nav sub-menu">
+                        <a href= "{{route ('all.amenitie')}}" class = "nav-link" >All Amenities</a>
+                      <li class="nav-item">
+                        <a href="pages/email/read.html" class="nav-link">Add Amenities</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="nav-item">
                   <a href="pages/apps/calendar.html" class="nav-link">
                     <i class="link-icon" data-feather="calendar"></i>
                     <span class="link-title">Calendar</span>

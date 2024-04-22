@@ -83,6 +83,19 @@ Route::controller(PropertyTypeController::class)->group(function(){
 
 });
 
+// Amenities perty Type All Route
+Route::controller(PropertyTypeController::class)->group(function(){
+
+    Route::get('/all/amenitie', 'Allamenitie')->name('all.amenitie');
+    Route::get('/add/amenitie', 'AddAmenitie')->name('add.amenitie');
+    Route::post('/store/type', 'StoreType')->name('store.type');
+    Route::get('/edit/type/{id}', 'EditType')->name('edit.type');
+    Route::post('/update/type', 'UpdateType')->name('update.type');
+    Route::get('/delete/type/{id}', 'DeleteType')->name('delete.type');
+  
+
+});
+
 });    //end group Admin Middleware
 
 
