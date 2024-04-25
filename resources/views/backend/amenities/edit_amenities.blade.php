@@ -13,14 +13,16 @@
             <div class="card">
                 <div class="card-body">
   
-                                  <h6 class="card-title">Add Amenitie</h6>
+                                  <h6 class="card-title">Edit Amenitie</h6>
   
-                                  <form id="myForm" method="POST" action="{{ route ('store.amenitie')}}" class="forms-sample">
+                                  <form id="myForm" method="POST" action="{{ route ('update.amenitie')}}" class="forms-sample">
                                     @csrf
+                        <input type="hidden"  name="id" value="{{$amenities->id}}">
         
                                       <div class="form-group mb-3">
                                           <label for="exampleInputUsername1" class="form-label">Amenitie Name</label>
-                                          <input type="text" name="amenitis_name" class="form-control">
+                                          <input type="text" name="amenitis_name" class="form-control" value="{{
+                                            $amenities->amenitis_name}}">
 
                                       </div>
 
