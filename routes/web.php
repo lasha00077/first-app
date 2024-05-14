@@ -107,6 +107,11 @@ Route::controller(RoleController::class)->group(function(){
     Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
     Route::post('/update/permission', 'UpdatePesmission')->name('update.permission');
     Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
+
+    Route::get('/import/permission', 'ImportPermission')->name('import.permission');
+
+    Route::get('/export', 'Export')->name('export');
+    Route::post('/import', 'Import')->name('import');
   
 
 });
