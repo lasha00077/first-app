@@ -9,6 +9,8 @@ use Spatie\Permission\Models\Permission;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PermissionExport;
 use App\Imports\PermissionImport;
+use App\Models\User;
+use DB;
 
 class RoleController extends Controller
 {
@@ -90,4 +92,99 @@ class RoleController extends Controller
         return redirect()->back()->with($notification);
 
     } // end method
+
+    ///Role all method
+
+    public function AllRoles(){
+       $roles = Role :: all();
+       return view('backend.pages.roles.all_roles',compact('roles'));
+    }
+
+    public function AddRoles(){
+        return view('backend.pages.roles.add_roles');
+    }//end method
+
+    public function StoreRoles(Request $request)
+    {
+        Role::create([
+            'name' => $request->name, 
+        ]);
+
+        $notification = array(
+            'message' => 'Role Create Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.roles')->with($notification);
+    }// end method
+
+     public function EditRoles($id){
+        $roles = Role::findOrFail($id);
+        return view('backend.pages.roles.edit_roles',compact('roles'));
+     }
+
+     public function UpdateRoles(Request $request)
+    {
+        $role_id = $request->id;
+        Role::findOrFail($role_id)->update([
+            'name' => $request->name, 
+        ]);
+
+        $notification = array(
+            'message' => 'Role Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.roles')->with($notification);
+    }// end method
+     
+
+    public function DeleteRoles($id){
+        
+        Role::findOrFail($id)->delete();
+          
+          $notification = array(
+            'message' => 'Role Deleted Successfully',
+            'alert-type' => 'success'
+          );
+
+          return redirect()->back()->with($notification);
+    }//end method
+
+
+    /////////////  Add Role Permission all Method //////////
+
+    public function AddRolesPermission(){
+
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+        return view('backend.pages.rolesetup.add_roles_permission',compact('roles','permissions','permission_groups'));
+    }//end method
+
+    public function RolePermissionStore(Request $request){
+ 
+      $data = array();
+      $permissions = $request->permission;
+
+      foreach($permissions as $key => $item){
+        $data['role_id'] = $request->role_id;
+        $data['permission_id'] = $item;
+
+        DB::table('role_has_permissions')->insert($data);
+
+      }//end foreach
+
+      $notification = array(
+        'message' => 'Role Permission Added Successfully',
+        'alert-type' => 'success'
+      );
+        return redirect()->route('all.roles.permission')->with($notification);
+
+    }//end method
+
+    public function AllRolesPermission(){
+        
+         $roles = Role::all();
+         return view('backend.pages.rolesetup.all_roles_permission',compact('roles'));
+
+    }//end method
 }
