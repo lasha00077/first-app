@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\PropertyType;
 use App\Models\Amenities;
 
+
 class PropertyTypeController extends Controller
 {
    public function AllType(){
@@ -142,5 +143,7 @@ public function UpdateAmenitie(Request $request){
        return redirect()->back()->with($notification);
 
    }//End Method
+
+   public function 
 
 }

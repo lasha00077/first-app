@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 class AdminController extends Controller
 {
     public function AdminDashboard(){
@@ -43,23 +46,46 @@ class AdminController extends Controller
 
    public function AdminProfileStore(Request $request)
    {
-    $id = Auth::user()->id;
-    $data = User::find($id);
-    $data ->username = $request->username;
-    $data ->name = $request->name;
-    $data ->email = $request->email;
-    $data ->phone = $request->phone;
-    $data ->address = $request->address;
-    $data ->username = $request->username;
+      $id = Auth::user()->id;
+      $data = User::find($id);
+      $data ->username = $request->username;
+      $data ->name = $request->name;
+      $data ->email = $request->email;
+      $data ->phone = $request->phone;
+      $data ->address = $request->address;
+      $data ->username = $request->username;
 
-    if ($request->file('photo'))
-     {
-       $file = $request->file('photo'); 
-       @unlink(public_path('upload/admin_images/'.$data->photo));
-       $filename = date('YmdHi').$file->getClientOriginalName();
-       $file->move(public_path('upload/admin_images'),$filename);
-       $data['photo'] = $filename;
-     }
+
+   if($request->file('photo')) {
+       $manager = new ImageManager(new Driver());
+    
+       
+       //$name_gen = hexdec(uniqid()).'.'.$request->file('photo')->getClientOriginalExtension();
+       //$name_gen = date('YmdHi').$request->file('photo')->getClientOriginalName();
+       $name_gen = date('YmdHi').$request->file('photo')->getClientOriginalExtension();
+       
+       $img = $manager->read($request->file('photo'));
+       //$img = @$manager->make($request->file('photo'));
+
+
+       $img = $img->resize(360,250);
+       //$img->toJpeg(80)->save('upload/admin_images/'.$name_gen);
+       $img->save('upload/admin_images/'.$name_gen);
+       //$save_url = 'upload/admin_images/'.$name_gen;
+       $data['photo'] = $name_gen;
+   }
+
+
+ //if ($request->file('photo'))
+ // {
+
+ //  $manager = new ImageManager(new Driver());
+ //   $file = $request->file('photo'); 
+ //   @unlink(public_path('upload/admin_images/'.$data->photo));
+ //   $filename = date('YmdHi').$file->getClientOriginalName();
+ //   $file->move(public_path('upload/admin_images'),$filename);
+ //   $data['photo'] = $filename;
+ // }
     $data->save();
 
     $notification = array(
